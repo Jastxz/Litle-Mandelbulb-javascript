@@ -4,7 +4,8 @@ Este código está inspirado y ayudado por el código de los siguientes enlaces:
   - http://www.redcode.nl
 */
 
-var formula = document.getElementById("formula");
+const formula = document.getElementById("formula");
+var numero;
 var archivo = "/potencia.txt";
 var currenty = 0.0;
 var context;
@@ -48,13 +49,27 @@ var rd = [0.0, 0.0, 0.0];
 
 window.onload = function () {
   Power = 8;
+  var query = window.location.search.substring(1);
+  var parms = query.split('#');//Si pasas más de una variable, usas un separador, como #
+  for (var i=0; i<parms.length; i++)
+  {
+    var pos = parms[i].indexOf('=');
+    if (pos > 0)
+    {
+      var val = parms[i].substring(pos+1);
+      Power = parseFloat(val);
+    }
+  }
+  console.log(Power)
   iniciaAnimacion();
 };
-
 //Función para cambiar la potencia de z y poder observar otros fractales
-function cambiaPotencia(){
-  location.reload;
-}
+formula.addEventListener("keyup", ({key}) => {
+  if (key === "Enter") {
+    numero = parseFloat(formula.value);
+	  location.href=`?Power=${numero}`;
+  }
+});
 
 function iniciaAnimacion() {
   //Preparamos el lugar de la imagen
