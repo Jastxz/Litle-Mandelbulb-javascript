@@ -47,28 +47,13 @@ var ro = [0.0, 0.0, 0.0];
 var rd = [0.0, 0.0, 0.0];
 
 window.onload = function () {
-    const fs = require("fs");
-
-    fs.readFile("potencia.txt", (err, data) => {
-        if (err){ 
-            Power = 8;
-        }else{
-            Power = parseInt(data.toString());
-        }
-        console.log(data.toString());
-
-    });
-    iniciaAnimacion();
+  Power = 8;
+  iniciaAnimacion();
 };
 
 //Función para cambiar la potencia de z y poder observar otros fractales
 function cambiaPotencia(){
-    const fs = require("fs");
-    fs.writeFile("potencia.txt", formula.innerText, (err) => {
-        if (err) throw err;
-        console.log("Completed!");
-    });
-    location.reload;
+  location.reload;
 }
 
 function iniciaAnimacion() {
