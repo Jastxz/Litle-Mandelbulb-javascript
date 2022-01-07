@@ -157,6 +157,8 @@ function mandelbulb(pos) {
   var dr = 1.0;
   var r = 0.0;
   for (var i = 0; i < Iteraciones; i++) {
+
+    //Nos aseguramos de que la parte real se quede donde nos interesa
     r = modulo(z);
     if (r > DEPTH_OF_FIELD) break;
 
@@ -176,29 +178,10 @@ function mandelbulb(pos) {
     z[1] = Math.sin(phi) * sinTheta;
     z[2] = Math.cos(theta);
     sumaVectores(multiplicacionEscalar(z, zr), pos);
+
   }
   return (0.5 * Math.log(r) * r) / dr;
 }
-
-/* function mandelbulb(pos) {
-  var delta = 64/cHeight;
-  var h = 0;
-  var c = 1.0
-} */
-/* def mandelbrot (x0,y0, L, N,D):
-    m=matrix(D,D)
-    delta=L/D
-    for i in range(D):
-        for j in range(D):
-            c=complex(x0+i*delta, y0+j*delta)
-            z=0
-            h=0
-            while (h<N) and (abs(z)<2):
-                z=z^2+c
-                h+=1
-            m[j,i]=h
-            
-    return m */
 
 //Con este método reposicionamos la luz y la escena en el tiempo
 function iniciaEscena() {
