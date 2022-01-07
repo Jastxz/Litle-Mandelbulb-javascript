@@ -9,6 +9,7 @@ const formula = document.getElementById("formula");
 var numero;
 var archivo = "/potencia.txt";
 var actual = 0.0;
+var actualXY = [0,0];
 var contexto;
 var image;
 var imageData;
@@ -85,7 +86,7 @@ function iniciaAnimacion() {
   var mandelbulbCanvas = document.getElementById("mandelbulto");
   cHeight = mandelbulbCanvas.height;
   cWidth = mandelbulbCanvas.width;
-  contexto = mandelbulbCanvas.getcontexto("2d");
+  contexto = mandelbulbCanvas.getContext("2d");
   contexto.fillRect(0, 0, cWidth, cHeight);
 
   //Con una profundidad de campo de 2.0x2.0 calculamos el detalle del pixel
@@ -179,6 +180,26 @@ function mandelbulb(pos) {
   return (0.5 * Math.log(r) * r) / dr;
 }
 
+/* function mandelbulb(pos) {
+  var delta = 64/cHeight;
+  var h = 0;
+  var c = 1.0
+} */
+/* def mandelbrot (x0,y0, L, N,D):
+    m=matrix(D,D)
+    delta=L/D
+    for i in range(D):
+        for j in range(D):
+            c=complex(x0+i*delta, y0+j*delta)
+            z=0
+            h=0
+            while (h<N) and (abs(z)<2):
+                z=z^2+c
+                h+=1
+            m[j,i]=h
+            
+    return m */
+
 //Con este método reposicionamos la luz y la escena en el tiempo
 function iniciaEscena() {
   var rad = aRad(anguloLuz);
@@ -237,6 +258,7 @@ function dibuja(imageData, y) {
 
     normaliza(restaVectores(igualaV1yV2(direccionRayo, rayLocation), eyeLocation));
 
+    actualXY[0] = x;
     var distanceFromCamera = 0.0;
     var d = map(rayLocation);
 
@@ -256,6 +278,7 @@ function dibuja(imageData, y) {
       if (distanceFromCamera > DEPTH_OF_FIELD) {
         break;
       }
+      actualXY[1] = Iteraciones;
       d = map(rayLocation);
     }
 
